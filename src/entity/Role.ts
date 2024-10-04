@@ -1,15 +1,18 @@
 import { Entity, Column, PrimaryGeneratedColumn} from "typeorm";
 
+export enum UserRole {
+  SUPER_ADMIN = "Super Admin",
+  ADMIN = "Admin",
+  STAFF = "Staff",
+  CUSTOMER = "Customer",
+}
 @Entity("role")
 export class Roles{
   @PrimaryGeneratedColumn()
-  role_p_id: number;
+  role_u_id: number;
   @Column({
     unique: true,
+    enum: UserRole,
   })
-  role: string;
-  @Column({
-    unique: true,
-  })
-  role_no: number;
+  role: UserRole
 }

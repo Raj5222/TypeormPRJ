@@ -2,13 +2,14 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  CreateDateColumn,
+  CreateDateColumn,ManyToOne,JoinColumn
 } from "typeorm";
+import { Roles } from "./Role";
 
 @Entity("staff")
-export class Staff{
+export class Staff {
   @PrimaryGeneratedColumn()
-  id: number;
+  staff_u_id: number;
   @Column()
   first_name: string;
   @Column()
@@ -17,18 +18,16 @@ export class Staff{
     unique: true,
   })
   email: string;
-  @Column({
-    type: "char",
-  })
+
+  @ManyToOne(() => Roles, (role) => role.role_u_id)
+  @JoinColumn({ name: "role" })
+  @Column({ default: 3})
   role: number;
+
   @Column({
     type: "bigint",
   })
   mobile: number;
-  @Column({
-    unique: true,
-  })
-  u_id: string;
   @CreateDateColumn()
   Create_Time: string;
 }

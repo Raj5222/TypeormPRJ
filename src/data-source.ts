@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { Staff } from "./entity/Staff";
 import { Roles } from "./entity/Role";
+import { Customer } from "./entity/Customer";
 import { Mstaff9181002100000 } from "./migration/Mstaff";
 import { MRole1696010000000 } from "./migration/Mrole";
 import * as dotenv from "dotenv";
@@ -25,11 +26,11 @@ export const AppDataSource = new DataSource({
   type: "postgres",
   host: process.env.host,
   port: parseInt(process.env.port),
-  username: process.env.username,
+  username: process.env.user,
   password: process.env.password,
   database: process.env.database,
-  synchronize: true, // Be careful with this in production, as it auto-updates the schema
+  synchronize: true,
   logging: false,
-  entities: [Staff, Roles],
+  entities: [Staff, Roles, Customer],
   migrations: [MRole1696010000000, Mstaff9181002100000],
 });
